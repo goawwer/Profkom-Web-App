@@ -1,0 +1,9 @@
+services:
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_DB: diary
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pg_pwd
+    ports:
+      "5433:5432"
