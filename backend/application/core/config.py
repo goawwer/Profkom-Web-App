@@ -8,6 +8,7 @@ class RunConfig(BaseModel):
 class ApiPrefix(BaseModel):
   title: str = "/diary"
   auth: str = "/auth"
+  user: str = "/user"
 
   @property
   def bearer_token_url(self) -> str:
