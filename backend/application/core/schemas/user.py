@@ -1,24 +1,12 @@
 from fastapi_users import schemas
-from types.user_id import UserIdType
-from pydantic import ConfigDict
+from core.types.user_id import UserIdType
+from typing import Optional
 
-class UserBase(schemas.BaseUser[UserIdType]):
+class UserRead(schemas.BaseUser[UserIdType]):
     username: str
 
-class UserRead(UserBase):
-    pass
+class UserCreate(schemas.BaseUserCreate):
+    username: str
 
-class UserCreate(UserBase):
-    pass
-
-class UserUpdate(UserCreate):
-    pass
-
-class UserUpdatePartial(UserCreate):
-    username: str | None = None
-
-class User(UserBase):
-    model_config = ConfigDict(
-        from_attributes = True
-    )
-    id: int
+class UserUpdate(schemas.BaseUserUpdate):
+    username: Optional[str]
