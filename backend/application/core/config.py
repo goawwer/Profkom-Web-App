@@ -30,6 +30,5 @@ class Settings(BaseSettings):
   db: DatabaseConfig
   run: RunConfig = RunConfig()
   prefix: ApiPrefix = ApiPrefix()
-  access_token: AccessToken
 
 settings = Settings()
