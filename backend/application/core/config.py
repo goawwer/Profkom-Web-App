@@ -9,6 +9,13 @@ class ApiPrefix(BaseModel):
   title: str = "/diary"
   auth: str = "/auth"
 
+  @property
+  def bearer_token_url(self) -> str:
+    parts = (self.title, self.auth, "/login")
+    path = "".join(parts)
+
+    return path.removeprefix("/")
+
 class DatabaseConfig(BaseModel):
   url: PostgresDsn
   echo: bool = False
