@@ -7,6 +7,7 @@ class RunConfig(BaseModel):
 
 class ApiPrefix(BaseModel):
   title: str = "/diary"
+  auth: str = "/auth"
 
 class DatabaseConfig(BaseModel):
   url: PostgresDsn
