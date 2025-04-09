@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, Result
 from core.models import Group
-from core.schemas import GroupCreate
+from core.schemas.group import GroupCreate
 
 async def get_all_groups(session: AsyncSession) -> list[Group]:
   stmt = select(Group).order_by(Group.id)

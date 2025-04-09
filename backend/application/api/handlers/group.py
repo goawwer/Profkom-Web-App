@@ -5,7 +5,7 @@ from core.config import settings
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.models import db_helper
-from core.schemas import GroupCreate
+from core.schemas.group import GroupCreate
 
 router = APIRouter(
   prefix=settings.prefix.group,
