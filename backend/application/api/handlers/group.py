@@ -17,8 +17,15 @@ router = APIRouter(
 
 @router.get("/")
 async def get_groups(
+  user: Annotated[User, Depends(current_user)],
   session: Annotated[AsyncSession, Depends(db_helper.session_getter)]
 ):
+  if not user.is_superuser:
+    raise HTTPException(
+      status_code=status.HTTP_403_FORBIDDEN,
+      detail="У вас нет доступа к этой функции"
+    )
+  
   return await crud.get_all_groups(session=session)
 
 @router.get("/{group_id}")
