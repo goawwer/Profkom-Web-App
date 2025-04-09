@@ -4,9 +4,12 @@ from typing import Optional
 
 class UserRead(schemas.BaseUser[UserIdType]):
     username: str
+    group_name: str
 
 class UserCreate(schemas.BaseUserCreate):
     username: str
+    group_name: str
 
 class UserUpdate(schemas.BaseUserUpdate):
     username: Optional[str]
+    group_name: Optional[str]
