@@ -14,17 +14,13 @@ class UserRead(schemas.BaseUser[UserIdType]):
     @model_validator(mode="before")
     def set_group_name(cls, values):
         if isinstance(values, dict):
+            # Если group уже загружен, используем его
             group = values.get("group")
-            if group:
+            if group and hasattr(group, "name"):
                 values["group_name"] = group.name
             else:
+                # Если group не загружен, полагаемся на group_name, если он есть
                 values["group_name"] = values.get("group_name", None)
-        else:
-            group = getattr(values, "group", None)
-            if group:
-                values.group_name = group.name
-            else:
-                values.group_name = getattr(values, "group_name", None)
         return values
 
 class UserCreate(schemas.BaseUserCreate):
