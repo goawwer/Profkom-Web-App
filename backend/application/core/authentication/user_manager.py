@@ -3,6 +3,7 @@ from typing import Optional, TYPE_CHECKING
 from fastapi import HTTPException, status
 from fastapi_users import BaseUserManager, IntegerIDMixin
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from core.schemas.user import UserCreate, InternalUserCreate
 from core.types.user_id import UserIdType
 from core.models import User
@@ -49,6 +50,15 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         created_user.group_name = group.name
 
         return created_user
+    
+    async def get(self, id: UserIdType) -> User:
+        # Переопределяем метод get, чтобы подгрузить group
+        query = select(User).where(User.id == id).options(selectinload(User.group))
+        result = await self.user_db.session.execute(query)
+        user = result.scalar_one_or_none()
+        if user is None:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
 
     async def on_after_register(self, user: User, request: Optional["Request"] = None):
         log.warning("User %r has registered.", user.id)
