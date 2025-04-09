@@ -5,6 +5,9 @@ class RunConfig(BaseModel):
   host: str = "0.0.0.0"
   port: int = 8000
 
+class ApiConstants(BaseModel):
+  usue: str = "https://www.usue.ru/schedule/"
+
 class ApiPrefix(BaseModel):
   title: str = "/diary"
   auth: str = "/auth"
@@ -41,5 +44,6 @@ class Settings(BaseSettings):
   run: RunConfig = RunConfig()
   prefix: ApiPrefix = ApiPrefix()
   access_token: AccessToken
+  constant: ApiConstants = ApiConstants()
 
 settings = Settings()

@@ -1,10 +1,11 @@
 import httpx
 from datetime import datetime, timedelta
 from typing import List
+from core.config import settings
 from core.schemas.schedule import DayScheduleSchema, ScheduleEntrySchema, PairSchema
 
 class GroupScheduleService:
-    BASE_URL = "https://www.usue.ru/schedule/"
+    BASE_URL = settings.constant.usue
     FIXED_PARAMS = {
         "t": "0.6556972024158835",
         "action": "show"
