@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from api.crud import group as crud
 from typing import Annotated
 from core.config import settings
@@ -34,7 +34,13 @@ async def create_group(
   session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
   group_in: GroupCreate
 ):
+  existing_group = await crud.get_group_by_name(session=session, group_name=group_in.name)
+  if existing_group:
+    raise HTTPException(
+      status_code = status.HTTP_400_BAD_REQUEST,
+      detail = f"Группа {group_in.name} уже существует"
+    )
   return await crud.create_group(
-    session=session,
-    group_in=group_in
+    session = session,
+    group_in = group_in
   )
