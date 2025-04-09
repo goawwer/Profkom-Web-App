@@ -2,9 +2,13 @@ from fastapi_users import schemas
 from core.types.user_id import UserIdType
 from typing import Optional
 
+class InternalUserCreate(schemas.BaseUserCreate):
+    username: str
+    group_id: int  # Соответствует модели User
+    
 class UserRead(schemas.BaseUser[UserIdType]):
     username: str
-    group_name: str
+    group_name: Optional[str] = None
 
 class UserCreate(schemas.BaseUserCreate):
     username: str
