@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from core.config import settings
-from core.schemas.user import UserRead, UserCreate
+from core.schemas.user import UserRead, UserUpdate
 from api.dependencies.authentication.api_users import fastapi_users
 
 router = APIRouter(
@@ -14,6 +14,6 @@ router = APIRouter(
 router.include_router(
   router = fastapi_users.get_users_router(
     UserRead,
-    UserCreate
+    UserUpdate
   )
 )
