@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
   
   username: Mapped[str] = mapped_column(String(40), unique=True)
-  group_name: Mapped[str] = mapped_column(ForeignKey(
-    "groups.name"
+  group_id: Mapped[int] = mapped_column(ForeignKey(
+    "groups.id"
   ))
   
   group: Mapped["Group"] = relationship(back_populates="users")
