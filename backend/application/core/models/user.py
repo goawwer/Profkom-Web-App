@@ -5,6 +5,7 @@ from sqlalchemy import String, ForeignKey
 from core.types.user_id import UserIdType
 from typing import TYPE_CHECKING
 from .mixins import IntIdPkMixin
+from typing import Optional
 from .group import Group
 
 if TYPE_CHECKING: 
@@ -12,8 +13,8 @@ if TYPE_CHECKING:
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
   
   username: Mapped[str] = mapped_column(String(40), unique=True)
-  group_id: Mapped[int] = mapped_column(ForeignKey(
-    "groups.id"
+  group_name: Mapped[str] = mapped_column(ForeignKey(
+    "groups.name"
   ))
   
   group: Mapped["Group"] = relationship(back_populates="users")
