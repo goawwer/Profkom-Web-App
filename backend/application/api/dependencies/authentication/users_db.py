@@ -1,5 +1,6 @@
 from fastapi import Depends
 from typing import TYPE_CHECKING, Annotated
+from fastapi_users.db import SQLAlchemyUserDatabase
 from core.models import db_helper, User
 
 if TYPE_CHECKING:
