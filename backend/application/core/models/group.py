@@ -8,6 +8,6 @@ if TYPE_CHECKING:
   from .user import User
 
 class Group(Base, IntIdPkMixin):
-  name: Mapped[int] = mapped_column(String(40))
+  name: Mapped[str] = mapped_column(String(40))
 
   users: Mapped[list["User"]] = relationship(back_populates="group")
