@@ -3,9 +3,11 @@ from api.crud import group as crud
 from typing import Annotated
 from core.config import settings
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from core.services.schedule import GroupScheduleService
 from core.models import db_helper
+from core.schemas.schedule import DayScheduleSchema
 from core.schemas.group import GroupCreate
+from core.dependencies.schedule_dependency import get_schedule_service
 
 router = APIRouter(
   prefix=settings.prefix.group,
@@ -44,3 +46,23 @@ async def create_group(
     session = session,
     group_in = group_in
   )
+
+@router.get("/{group_id}/schedule/", response_model=list[DayScheduleSchema])
+async def get_group_schedule(
+  session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
+  service: Annotated[GroupScheduleService, Depends(get_schedule_service)],
+  group_id: int,
+  week_offset: int = 0,
+):
+  group = await crud.get_group_by_id(
+    session=session,
+    group_id=group_id
+  )
+  if not group:
+    raise HTTPException(
+      status_code=status.HTTP_404_NOT_FOUND,
+      detail=f"Группа не найдена"
+    )
+  
+  schedule = await service.fetch_schedule(group.name, week_offset)
+  return schedule
