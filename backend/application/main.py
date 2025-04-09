@@ -3,10 +3,20 @@ from core.models import db_helper
 from contextlib import asynccontextmanager
 from core.config import settings
 from api.handlers import api_router
+from scripts.create_superuser import create_superuser
 import uvicorn
+import logging
+
+log = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+
+  #superuser
+  try:
+    await create_superuser()
+  except Exception as e:
+    log.exception("Не удалось создать суперпользователя: %r", e)
   #start
   yield
   #shutdown
