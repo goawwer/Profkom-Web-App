@@ -10,6 +10,7 @@ if TYPE_CHECKING:
   from sqlalchemy.ext.asyncio import AsyncSession
   from .plan_item import PlanItem
   from .group import Group
+  from .profkom_event import ProfkomEvent
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
   
   username: Mapped[str] = mapped_column(String(40), unique=True)
@@ -21,6 +22,8 @@ class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
 
   plan_items: Mapped[list["PlanItem"]] = relationship(back_populates="user")
   
+  profkom_events: Mapped[list["ProfkomEvent"]] = relationship(back_populates="creator")
+
   @classmethod 
   def get_db(cls, session: "AsyncSession"):
     return SQLAlchemyUserDatabase(session, cls)

@@ -5,7 +5,8 @@ __all__ = (
   "User",
   "AccessToken",
   "Group",
-  "PlanItem"
+  "PlanItem",
+  "ProfkomEvent"
 )
 
 from .base import Base
@@ -14,3 +15,4 @@ from .user import User
 from .access_token import AccessToken
 from .group import Group
 from .plan_item import PlanItem
+from .profkom_event import ProfkomEvent
