@@ -6,7 +6,8 @@ __all__ = (
   "AccessToken",
   "Group",
   "PlanItem",
-  "ProfkomEvent"
+  "ProfkomEvent",
+  "Note"
 )
 
 from .base import Base
@@ -16,3 +17,4 @@ from .access_token import AccessToken
 from .group import Group
 from .plan_item import PlanItem
 from .profkom_event import ProfkomEvent
+from .note import Note
