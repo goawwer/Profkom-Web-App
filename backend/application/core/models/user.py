@@ -5,11 +5,11 @@ from sqlalchemy import String, ForeignKey
 from core.types.user_id import UserIdType
 from typing import TYPE_CHECKING
 from .mixins import IntIdPkMixin
-from .group import Group
-from typing import Optional
 
 if TYPE_CHECKING: 
   from sqlalchemy.ext.asyncio import AsyncSession
+  from .plan_item import PlanItem
+  from .group import Group
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
   
   username: Mapped[str] = mapped_column(String(40), unique=True)
@@ -18,6 +18,8 @@ class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[UserIdType]):
   ))
   
   group: Mapped["Group"] = relationship(back_populates="users")
+
+  plan_items: Mapped[list["PlanItem"]] = relationship(back_populates="user")
   
   @classmethod 
   def get_db(cls, session: "AsyncSession"):
