@@ -6,18 +6,12 @@ from core.models import User, db_helper, PlanItem
 from core.schemas.plan_item import PlanItemCreate, PlanItemUpdate, PlanItemUpdatePartial
 from typing import Annotated
 from api.dependencies.authentication.api_users import current_user
-from .dependencies import get_object_dependency
 
 router = APIRouter(
     prefix=settings.prefix.plan_item,
     tags=["Plan Items"]
 )
 
-plan_item_dep = get_object_dependency(
-    cls=PlanItem,
-    crud_func=crud.get_plan_item,
-    path_param="plan_item_id"
-)
 
 @router.get("/all")
 async def get_all_plans(
@@ -28,25 +22,15 @@ async def get_all_plans(
 
 @router.get("/{plan_item_id}/")
 async def get_plan_item(
-    item: Annotated[PlanItem, Depends(plan_item_dep)]
-):
-    return item
-"""
-@router.get("/{plan_item_name}")
-async def get_plan_item_by_name(
-    plan_item_name: str,
     user: Annotated[User, Depends(current_user)],
-    session: Annotated[AsyncSession, Depends(db_helper.session_getter)]
+    session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
+    item_id: int
 ):
-    item = await crud.get_plan_item_by_name(session=session, item_name = plan_item_name, user_id=user.id)
-    if not item:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Задача не найдена"
-        )
-    return item
-"""
-
+    return await crud.get_plan_item(
+        user_id = user.id,
+        session=session,
+        item_id=item_id
+    )
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_plan_item(
@@ -62,34 +46,96 @@ async def create_plan_item(
 
 @router.put("/{plan_item_id}/")
 async def update_plan_item(
-    item: Annotated[PlanItem, Depends(plan_item_dep)],
+    plan_item_id: int,
+    user: Annotated[User, Depends(current_user)],
     session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
-    item_update: PlanItemUpdate
+    item_update: PlanItemUpdate,
 ):
-    return await crud.update_plan_item(
+    item = await crud.get_plan_item(
         session=session,
-        item=item,
-        item_update=item_update,
-        partial=False
+        item_id=plan_item_id,
+        user_id=user.id
     )
 
-@router.patch("/{plan_item_id}/")
-async def partial_update_plan_item(
-    item: Annotated[PlanItem, Depends(plan_item_dep)],
+    if not item:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"PlanItem с ID {plan_item_id} не найден"
+        )
+
+    if item.user_id != user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="У вас нет прав для обновления этого элемента"
+        )
+    updated_item = await crud.update_plan_item(
+        user_id=user.id,
+        session=session,
+        item=item,
+        item_update=item_update
+    )
+    return updated_item
+
+@router.put("/{plan_item_id}/")
+async def update_plan_partial(
+    plan_item_id: int,
+    user: Annotated[User, Depends(current_user)],
     session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
-    item_update: PlanItemUpdatePartial
+    item_update: PlanItemUpdatePartial,
 ):
-    return await crud.update_plan_item(
+    item = await crud.get_plan_item(
+        session=session,
+        item_id=plan_item_id,
+        user_id=user.id
+    )
+
+    if not item:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"PlanItem с ID {plan_item_id} не найден"
+        )
+
+    if item.user_id != user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="У вас нет прав для обновления этого элемента"
+        )
+    updated_item = await crud.update_plan_item(
+        user_id=user.id,
         session=session,
         item=item,
         item_update=item_update,
         partial=True
     )
+    return updated_item
 
-@router.delete("/{plan_item_id}/", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{plan_item_id}/")
 async def delete_plan_item(
-    item: Annotated[PlanItem, Depends(plan_item_dep)],
-    session: Annotated[AsyncSession, Depends(db_helper.session_getter)]
+    plan_item_id: int,
+    user: Annotated[User, Depends(current_user)],
+    session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
 ):
-    await crud.delete_plan_item(session=session, item=item)
-    return None
+    item = await crud.get_plan_item(
+        session=session,
+        item_id=plan_item_id,
+        user_id=user.id
+    )
+
+    if not item:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"PlanItem с ID {plan_item_id} не найден"
+        )
+
+    if item.user_id != user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="У вас нет прав для удаления этого элемента"
+        )
+    
+    deleted_item = await crud.delete_plan_item(
+        user_id=user.id,
+        session=session,
+        item=item,
+    )
+    return f"Запись удалена{deleted_item}"
