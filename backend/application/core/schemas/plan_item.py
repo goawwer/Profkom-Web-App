@@ -2,6 +2,8 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional
 
+DATETIME_FORMAT = "%d-%m-%Y %H:%M:%S"  # "DD-MM-YYYY HH:MM:SS"
+
 class PlanItemBase(BaseModel):
     title: str
     description: Optional[str] = None
@@ -25,7 +27,10 @@ class PlanItemUpdatePartial(PlanItemBase):
 
 class PlanItem(PlanItemBase):
     model_config = ConfigDict(
-        from_attributes=True
+        from_attributes=True,
+        json_encoders={
+            datetime: lambda v: v.strftime(DATETIME_FORMAT) if v else None
+        }
     )
     id: int
     user_id: int  
