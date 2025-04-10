@@ -75,7 +75,7 @@ async def update_event(
     )
 
 
-@router.put("/{event_id}/")
+@router.patch("/{event_id}/")
 async def update_event_partial(
     event_id: int,
     user: Annotated[User, Depends(current_user)],
@@ -127,7 +127,7 @@ async def delete_plan_item(
             session=session,
             event = event,
         )
-        return f"Запись удалена{deleted_event}"
+        return f"Запись удалена"
     raise HTTPException(
         status_code=status.HTTP_403_FORBIDDEN
     )

@@ -76,7 +76,7 @@ async def update_plan_item(
     )
     return updated_item
 
-@router.put("/{plan_item_id}/")
+@router.patch("/{plan_item_id}/")
 async def update_plan_partial(
     plan_item_id: int,
     user: Annotated[User, Depends(current_user)],
@@ -138,4 +138,4 @@ async def delete_plan_item(
         session=session,
         item=item,
     )
-    return f"Запись удалена{deleted_item}"
+    return f"Запись удалена"
