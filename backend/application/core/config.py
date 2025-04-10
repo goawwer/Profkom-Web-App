@@ -15,6 +15,7 @@ class ApiPrefix(BaseModel):
   group: str = "/group"
   plan_item: str = "/plan_item"
   profkom_event: str = "/event"
+  note: str = "/notes"
 
   @property
   def bearer_token_url(self) -> str:
