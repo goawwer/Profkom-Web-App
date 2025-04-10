@@ -117,7 +117,7 @@ async def delete_note(
             detail=f"PlanItem с ID {note_id} не найден"
         )
     
-    deleted_item = await crud.delete_note(
+    await crud.delete_note(
         user_id=user.id,
         session=session,
         note=note,

@@ -122,7 +122,7 @@ async def delete_plan_item(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"PlanItem с ID {event_id} не найден"
         )
-        deleted_event = await crud.delete_event(
+        await crud.delete_event(
             user_id=user.id,
             session=session,
             event = event,

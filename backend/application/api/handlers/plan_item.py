@@ -133,7 +133,7 @@ async def delete_plan_item(
             detail="У вас нет прав для удаления этого элемента"
         )
     
-    deleted_item = await crud.delete_plan_item(
+    await crud.delete_plan_item(
         user_id=user.id,
         session=session,
         item=item,
