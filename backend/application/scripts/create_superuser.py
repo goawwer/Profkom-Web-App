@@ -19,12 +19,12 @@ get_users_db_context = contextlib.asynccontextmanager(get_users_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 
-default_email = getenv("DEFAULT_EMAIL", "superadmin2@admin.com")
-default_password = getenv("DEFAULT_PASSWORD", "admin12345678")
+default_email = getenv("DEFAULT_EMAIL", "superadmin@admin.com")
+default_password = getenv("DEFAULT_PASSWORD", "admin")
 default_is_active = True
 default_is_superuser = True
 default_is_verified = True
-default_username = getenv("DEFAULT_USERNAME", "superadmin2")
+default_username = getenv("DEFAULT_USERNAME", "superadmin")
 default_group_name = getenv("DEFAULT_GROUP_NAME", "admin")
 
 
