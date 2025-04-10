@@ -13,12 +13,12 @@ class NoteBase(BaseModel):
 class NoteCreate(NoteBase):
   pass
 
-class NoteUpdate(NoteBase):
+class NoteUpdate(BaseModel):
   title: Optional[str] = None
   text: Optional[str] = None
   is_important: Optional[bool] = False
 
-class NoteUpdatePartial(NoteBase):
+class NoteUpdatePartial(BaseModel):
   title: Optional[str] = None
   text: Optional[str] = None
   is_important: Optional[bool] = False
