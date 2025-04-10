@@ -11,10 +11,16 @@ async def get_plan_items(session: AsyncSession, user_id: int) -> list[PlanItem]:
   return list(items)
 
 async def get_plan_item(session: AsyncSession, item_id: int, user_id: int) -> PlanItem | None:
-    stmt = select(PlanItem).where(PlanItem.id == item_id, PlanItem.user_id == user_id)
-    result = await session.execute(stmt)
-    return result.scalars().first()
+  stmt = select(PlanItem).where(PlanItem.id == item_id, PlanItem.user_id == user_id)
+  result = await session.execute(stmt)
+  return result.scalars().first()
 
+"""
+async def get_plan_item_by_name(session: AsyncSession, item_name: str, user_id: int) -> PlanItem | None:
+  stmt = select(PlanItem).where(PlanItem.title == item_name, PlanItem.user_id == user_id)
+  result = await session.execute(stmt)
+  return result.scalar_one_or_none()
+"""
 async def create_plan_item(session: AsyncSession, item_in: PlanItemCreate, user_id: int) -> PlanItem:
   item = PlanItem(**item_in.model_dump(), user_id = user_id)
   session.add(item)
