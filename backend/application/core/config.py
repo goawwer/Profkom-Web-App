@@ -13,6 +13,7 @@ class ApiPrefix(BaseModel):
   auth: str = "/auth"
   user: str = "/user"
   group: str = "/group"
+  plan_item: str = "/plan_item"
 
   @property
   def bearer_token_url(self) -> str:
