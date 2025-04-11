@@ -1,3 +1,5 @@
+from fastapi.middleware.cors import CORSMiddleware
+
 from fastapi import FastAPI
 from core.models import db_helper
 from contextlib import asynccontextmanager
@@ -27,6 +29,15 @@ def create_app() -> FastAPI:
     title="HAHA",
     lifespan=lifespan
   )
+
+  main_app.add_middleware(
+    CORSMiddleware,
+    allow_origins="http://localhost:5173",
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+  )
+
   main_app.include_router(router=api_router)
   return main_app
 
@@ -35,5 +46,7 @@ main_app = create_app()
 if __name__ == "__main__":
   uvicorn.run(
     "main:main_app",
+    host=settings.run.host,
+    port=settings.run.port,
     reload=True
   )
