@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from core.config import settings
 from .auth import router as auth_router 
 from .user import router as user_router
+from .token import router as token_router
 from .group import router as group_router
 from .plan_item import router as plans_router
 from .profkom_event import router as events_router
@@ -16,6 +17,7 @@ api_router = APIRouter(
 )
 api_router.include_router(router = auth_router)
 api_router.include_router(router = user_router)
+api_router.include_router(router = token_router)
 api_router.include_router(router = group_router)
 api_router.include_router(router = plans_router)
 api_router.include_router(router = events_router)
