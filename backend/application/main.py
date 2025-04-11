@@ -1,5 +1,5 @@
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import ORJSONResponse
 from fastapi import FastAPI
 from core.models import db_helper
 from contextlib import asynccontextmanager
@@ -26,6 +26,7 @@ async def lifespan(app: FastAPI):
 
 def create_app() -> FastAPI:
   main_app = FastAPI(
+    default_response_class=ORJSONResponse,
     title="HAHA",
     lifespan=lifespan
   )
