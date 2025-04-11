@@ -1,0 +1,26 @@
+.dailyTask {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 100%;
+
+    &__subInfo {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            font-size: var(--smallest-font-size);
+            color: var(--black-color)
+        }
+    }
+
+    &__button {
+        border-radius: 0.8rem;
+        color: white;
+        font-weight: var(--bold-font-weight);
+        font-size: var(--less-font-size);
+        width: 100%;
+        padding: 0.75rem 0;
+    }
+
+}
