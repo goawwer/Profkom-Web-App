@@ -15,7 +15,7 @@ router = APIRouter(
   tags=["Group"]
 )
 
-@router.get("/")
+@router.get("/all")
 async def get_groups(
   user: Annotated[User, Depends(current_user)],
   session: Annotated[AsyncSession, Depends(db_helper.session_getter)]
