@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from core.config import settings
 from api.handlers import api_router
 from scripts.create_superuser import create_superuser
+from scripts.groupmaker import create_groups
 import uvicorn
 import logging
 
@@ -17,8 +18,9 @@ async def lifespan(app: FastAPI):
   #superuser
   try:
     await create_superuser()
+    await create_groups()
   except Exception as e:
-    log.exception("Не удалось создать суперпользователя: %r", e)
+    log.exception("Скрипт не сработал: %r", e)
   #start
   yield
   #shutdown
