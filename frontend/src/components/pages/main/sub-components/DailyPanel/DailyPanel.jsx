@@ -14,7 +14,7 @@ const DailyPanel = ({currentDay = todayDay}) => {
         <div className={s.dailyPanel}>
             <div className={s.dailyPanel__header}>
                 <button>{"<"}</button>
-                <h1>
+                <h1 className={s.dailyPanel__day}>
                     {weekDay}, <br/>
                     {day}
                 </h1>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const withAuth = (Header, Outlet) => {
     return () => {
-        if (false) {
-            if (localStorage.getItem("userProfkomKey")) {
-                console.log(localStorage.getItem("userProfkomKey"))
+        if (true) {
+            if (localStorage.getItem("profkomUserToken")) {
+                console.log(localStorage.getItem("profkomUserToken"))
                 return (
                     <div style={{width: "90%", paddingBottom: "2rem"}}>
                         <Header />

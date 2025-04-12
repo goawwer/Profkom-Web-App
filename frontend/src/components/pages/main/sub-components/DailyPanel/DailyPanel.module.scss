@@ -17,4 +17,9 @@
         flex-direction: column;
         gap: 2rem
     }
+
+    &__day {
+        letter-spacing: 0.05rem;
+        font-weight: var(--black-font-weight);
+    }
 }

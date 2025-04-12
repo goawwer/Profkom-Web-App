@@ -32,7 +32,8 @@ body {
 
 h1 {
     font-size: 2rem;
-    font-weight: var(--black-font-weight);
+    font-weight: var(--bold-font-weight);
+    letter-spacing: 0.12rem;
 }
 
 button {

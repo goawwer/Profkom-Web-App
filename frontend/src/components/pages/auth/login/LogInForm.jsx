@@ -2,6 +2,8 @@ import React from 'react';
 import s from './LogInForm.module.scss'
 import { useForm } from 'react-hook-form';
 import handleLogin from '../../../../hooks/axios/POST/handleLogin';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const LogInForm = () => {
@@ -12,9 +14,32 @@ const LogInForm = () => {
         }
     });
 
+    const [isToken, setIsToken] = useState(false)
+    const navigate = useNavigate()
+
     const onSubmit = async (data) => {
-        const response = await handleLogin(data)
+        const [returnData, error, isToken] = await handleLogin(data)
+        setIsToken(isToken)
     }
+
+    useEffect(() => {
+        const getFromLocalStorage = () => {
+            const value = localStorage.getItem("profkomUserToken")
+            if (!localStorage.getItem("profkomUserToken")) {
+                throw new Error('ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗИРОВАН !')
+            } else {
+                return value
+            }
+        }
+        try {
+            const gfls = getFromLocalStorage()
+            navigate('/')
+            console.log(isToken)
+        } catch (error) {
+            console.log(error.message)
+        }
+        
+    }, [isToken])
 
     return (
             <form className={s.authForm} onSubmit={handleSubmit(onSubmit)}>

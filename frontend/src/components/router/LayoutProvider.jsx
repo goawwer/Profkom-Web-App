@@ -8,22 +8,32 @@ import Profile from '../pages/profile/Profile'
 import Notes from '../pages/notes/Notes'
 import LogIn from "../pages/auth/login/LogIn";
 import Registration from "../pages/auth/registration/Registration";
+import UnauthLayout from "./UnauthLayout";
 
 export default function LayoutProvider () {
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route path='/' element={<RootLayout />}>
-                <Route index element={<Main />} />
+            <Route element = {<Outlet/>}>
 
-                <Route path='/schedule' element={<Schedule />} />
+                <Route path='/' element={<RootLayout />}>
 
-                <Route path='/notes' element={<Notes />} />
+                    <Route index element={<Main />} />
 
-                <Route path='/profile' element={<Profile />} />
+                    <Route path='/schedule' element={<Schedule />} />
 
-                <Route path='/registration' element={<Registration />} />
+                    <Route path='/notes' element={<Notes />} />
 
-                <Route path='/login' element={<LogIn />} />
+                    <Route path='/profile' element={<Profile />} />
+
+                </Route>
+
+                <Route element={<UnauthLayout />}>
+
+                    <Route path='/auth/registration' element={<Registration />} />
+                    <Route path='/auth/login' element={<LogIn />} />
+
+                </Route>
+
             </Route>
         )
     )

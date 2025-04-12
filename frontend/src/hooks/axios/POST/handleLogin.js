@@ -1,9 +1,22 @@
+import axios from "axios"
 import baseHandlePost from "./baseHandlePost"
+import qs from 'qs'
 
-const handleLogin = (data) => {
-    const response = baseHandlePost({data: data, url: '/auth/login'})
+const handleLogin = async (data) => {
+    data = qs.stringify(data);
 
-    return response
+    const [returnData, error] = await baseHandlePost({data: data, url: '/auth/login', headers: 'application/x-www-form-urlencoded'})
+
+    let isToken = false;
+
+    if (returnData) {
+        console.log(returnData.access_token)
+        localStorage.setItem("profkomUserToken", returnData.access_token)
+        isToken = true   
+    }
+    
+
+    return [returnData, error, isToken]
 }
 
 export default handleLogin
