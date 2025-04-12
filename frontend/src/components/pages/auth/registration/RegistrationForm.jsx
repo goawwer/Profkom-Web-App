@@ -56,7 +56,7 @@ const RegistrationForm = () => {
                     <input  {...register('password', 
                             { required: 'это поле обязательно',
                             minLength: {
-                                value: 8,
+                                value: 3,
                                 message: 'пароль должен содержать не меньше 8 символов'
                             },
                             onChange: () => trigger('password')
