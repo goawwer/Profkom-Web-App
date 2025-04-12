@@ -1,7 +1,6 @@
 import React from "react"; 
 import Header from "../navigation/Header";
 import { Outlet } from "react-router-dom";
-import withAuth from "../HOC's/withAuth";
 import getFromLocalStorage from "../../hooks/axios/getFromLocalStorage";
 import NotAuthPage from "../pages/auth/login/not-auth-page/NotAuthPage";
 
