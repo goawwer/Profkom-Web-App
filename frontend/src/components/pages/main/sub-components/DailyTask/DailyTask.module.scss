@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 0.2rem;
     width: 100%;
+    background: transparent;
 
     &__subInfo {
         display: flex;
@@ -21,6 +22,7 @@
         font-size: var(--less-font-size);
         width: 100%;
         padding: 0.75rem 0;
+        background: transparent;
     }
 
 }
