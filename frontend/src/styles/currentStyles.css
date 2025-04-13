@@ -39,6 +39,11 @@ h1 {
 button {
     letter-spacing: 0.05rem;
     border-radius: 0.75rem;
+    background: #5e91ff;
+    background: -webkit-linear-gradient(0deg,rgba(94, 145, 255, 1) 0%, rgba(27, 96, 249, 1) 89%);
+    background: -moz-linear-gradient(0deg,rgba(94, 145, 255, 1) 0%, rgba(27, 96, 249, 1) 89%);
+    background: linear-gradient(0deg,rgba(94, 145, 255, 1) 0%, rgba(27, 96, 249, 1) 89%);
+    letter-spacing: 0.12rem;
 }
 
 input {
@@ -49,4 +54,9 @@ input {
     font-size: 1rem;
     letter-spacing: 0.05rem;
     text-align: center;
+}
+
+b {
+    font-weight: var(--bold-font-weight);
+    letter-spacing: 0.1rem;
 }

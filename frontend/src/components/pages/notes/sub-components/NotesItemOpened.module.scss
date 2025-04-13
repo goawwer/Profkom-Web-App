@@ -1,0 +1,51 @@
+.noteOpened {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    background-color: var(--blue-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &__buttonsPanel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__titlePlace {
+
+        b {
+            font-weight: var(--black-font-weight);
+            font-size: var(--large-font-size);
+        }
+    }
+
+    &__contentPlace, &__titlePlace {
+
+        border-bottom: 0.1rem white solid;
+    }
+
+    button {
+        background: transparent;
+        width: 4rem;
+        height: 4rem;
+    }
+
+    input, textarea {
+        color: white;
+        border-bottom: transparent;
+        text-align: justify;
+        width: 100%;
+        height: max-content;
+
+        &::placeholder {
+            color: white;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
