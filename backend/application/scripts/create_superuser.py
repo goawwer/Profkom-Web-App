@@ -95,7 +95,4 @@ async def create_superuser(
 
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(create_superuser())
-    except Exception as e:
-        log.warning("Ошибка при выполнении скрипта: %r", str(e))
+    asyncio.run(create_superuser())

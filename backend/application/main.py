@@ -1,11 +1,12 @@
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import ORJSONResponse
 from fastapi import FastAPI
 from core.models import db_helper
 from contextlib import asynccontextmanager
 from core.config import settings
 from api.handlers import api_router
 from scripts.create_superuser import create_superuser
+from scripts.groupmaker import create_groups
 import uvicorn
 import logging
 
@@ -17,15 +18,17 @@ async def lifespan(app: FastAPI):
   #superuser
   try:
     await create_superuser()
+    await create_groups()
   except Exception as e:
-    log.exception("Не удалось создать суперпользователя: %r", e)
+    log.exception("Скрипт не сработал: %r", e)
   #start
   yield
   #shutdown
-  db_helper.dispose()
+  await db_helper.dispose()
 
 def create_app() -> FastAPI:
   main_app = FastAPI(
+    default_response_class=ORJSONResponse,
     title="HAHA",
     lifespan=lifespan
   )

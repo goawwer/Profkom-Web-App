@@ -22,13 +22,11 @@ class GroupScheduleService:
         :param week_offset: Смещение недели (0 - текущая, 1 - следующая, -1 - предыдущая)
         :return: Список объектов DayScheduleSchema
         """
-        # Вычисляем даты начала и конца недели
+
         start_date, end_date = self._get_week_dates(week_offset)
 
-        # Формируем URL
         url = self._build_url(group_name, start_date, end_date)
 
-        # Выполняем запрос
         try:
             response = await self.client.get(url)
             response.raise_for_status()
@@ -37,7 +35,6 @@ class GroupScheduleService:
         except httpx.RequestError as e:
             raise Exception(f"Ошибка сети: {e}")
 
-        # Парсим данные
         data = response.json()
         return self._parse_schedule(data)
 
@@ -51,16 +48,12 @@ class GroupScheduleService:
         # Текущая дата
         today = datetime.now()
 
-        # Находим начало текущей недели (понедельник)
         start_of_week = today - timedelta(days=today.weekday())
 
-        # Применяем смещение
         start_of_week += timedelta(weeks=week_offset)
 
-        # Конец недели (воскресенье)
         end_of_week = start_of_week + timedelta(days=6)
 
-        # Форматируем даты в DD.MM.YYYY
         start_date = start_of_week.strftime("%d.%m.%Y")
         end_date = end_of_week.strftime("%d.%m.%Y")
 
@@ -94,7 +87,6 @@ class GroupScheduleService:
         schedule = []
 
         for day_data in data:
-            # Парсим пары
             pairs = []
             for pair_data in day_data.get("pairs", []):
                 schedule_pairs = [
@@ -115,7 +107,6 @@ class GroupScheduleService:
                 )
                 pairs.append(pair)
 
-            # Создаём объект DayScheduleSchema
             day_schedule = DayScheduleSchema(
                 date=day_data.get("date", ""),
                 weekDay=day_data.get("weekDay", ""),
@@ -127,5 +118,4 @@ class GroupScheduleService:
         return schedule
 
     async def close(self):
-        """Закрывает HTTP-клиент."""
         await self.client.aclose()

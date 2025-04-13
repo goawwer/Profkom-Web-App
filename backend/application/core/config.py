@@ -11,10 +11,10 @@ class ApiConstants(BaseModel):
 class ApiPrefix(BaseModel):
   title: str = "/diary"
   auth: str = "/auth"
-  user: str = "/user"
-  group: str = "/group"
-  plan_item: str = "/plan_item"
-  profkom_event: str = "/event"
+  user: str = "/users"
+  group: str = "/groups"
+  plan_item: str = "/plan_items"
+  profkom_event: str = "/events"
   note: str = "/notes"
 
   @property
