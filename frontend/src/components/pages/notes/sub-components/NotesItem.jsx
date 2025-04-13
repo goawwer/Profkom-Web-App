@@ -3,9 +3,13 @@ import s from './NotesItem.module.scss'
 import NotesItemOpened from './NotesItemOpened';
 
 const NotesItem = ({data}) => {
+
+    const text = data?.text
+    const title = data?.title
+
     const [isOpened, setIsOpened] = useState(false)
-    const text = data.text
-    const title = data.title
+
+
 
     const handleOpenNote = () => {
         setIsOpened(true)

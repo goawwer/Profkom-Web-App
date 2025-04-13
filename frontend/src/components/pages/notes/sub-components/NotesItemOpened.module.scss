@@ -27,6 +27,11 @@
         border-bottom: 0.1rem white solid;
     }
 
+    &__title {
+        font-size: var(--large-font-size);
+        font-weight: var(--black-font-weight);
+    }
+
     button {
         background: transparent;
         width: 4rem;

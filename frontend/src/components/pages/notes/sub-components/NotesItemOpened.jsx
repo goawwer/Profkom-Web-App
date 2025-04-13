@@ -6,29 +6,60 @@ import Close_Icon from "../../../../assets/svgs/icon_close.svg?react"
 import Save_Icon from "../../../../assets/svgs/icon_save.svg?react"
 import { useForm, Controller } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
+import { useNavigate } from 'react-router-dom';
+import handlePatchNote from '../../../../hooks/axios/POST/handlePatchNote';
+import handleNoteDelete from '../../../../hooks/axios/DELETE/handleNoteDelete'
+import handlePosthNote from '../../../../hooks/axios/POST/handlePostNote';
 
-const NotesItemOpened = ({data, setIsOpened}) => {
+const NotesItemOpened = ({data, setIsOpened, isCreate}) => {
 
-    const [isPined, setIsPined] = useState(data.is_important)
+    const navigate = useNavigate()
+
     const text = data.text
     const title = data.title
+    const id = data.id
 
-        const { register, handleSubmit, formState: { errors }, control } = useForm({
+        const { register, handleSubmit, formState: { errors }, control, setValue, getValues } = useForm({
             defaultValues: {
                 title: title,
-                text: text
+                text: text,
+                is_important: data.is_important,
+                created_at: data.created_at
             }
         });
 
-    const changePin = (setIsPined, isPined) => {
+    const [isPined, setIsPined] = useState(false)     
+
+    const changePin = () => {
+        const prev_value = getValues("is_important")
         setIsPined(!isPined)
+        setValue("is_important", !prev_value)
+    }
+
+    const onSubmit = (data) => {
+        console.log(data)
+        if (isCreate) {
+            handlePosthNote(data)
+            return
+        } else {
+            handlePatchNote(id, data)
+            setIsOpened(false)
+            navigate('/notes')
+        }
     }
 
     return (
         <ModalsTemplate>
-            <form className={s.noteOpened}>
+            <form className={s.noteOpened} onSubmit={handleSubmit(onSubmit)}>
+                    <button type='button'
+                        onClick={() => {setIsOpened(false)}}
+                        style={{width: "3.7rem"}}
+                    >
+                        <Close_Icon />
+                    </button>
+
                 <div className={s.noteOpened__titlePlace} >
-                    <b>{title}</b>
+                    <input {...register("title")} type='text' className={s.noteOpened__title}/>
                 </div>
                 
                 
@@ -46,15 +77,15 @@ const NotesItemOpened = ({data, setIsOpened}) => {
                 <div className={s.noteOpened__buttonsPanel}>
 
                     <button type='button'
-                        onClick={() => {setIsOpened(false)}}
-                        style={{width: "3.7rem", marginRight: "50%"}}
+                        onClick={() => {handleNoteDelete(id); navigate('/notes')}}
+                        style={{width: "max-content", marginRight: "20%"}}
                     >
-                        <Close_Icon />
+                        удалить
                     </button>
 
                     <button type='button'
-                        onClick={() => {changePin(setIsPined, isPined)}}
-                        style={isPined ? {opacity: 1} : {opacity: 0.5}}
+                        onClick={() => {changePin()}}
+                        style={getValues("is_important") ? {opacity: 1} : {opacity: 0.5}}
                     >
                         <Pin />
                     </button>

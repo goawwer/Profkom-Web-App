@@ -27,7 +27,7 @@ baseAxios.interceptors.response.use(
   }
 );
 
-const useBaseGet = ({ method = 'GET', url }) => {
+const useBaseGet = ({ method = 'GET', url, deps=[] }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -51,14 +51,14 @@ const useBaseGet = ({ method = 'GET', url }) => {
       }
     };
 
-    if (!data) {
+
       fetchData();
-    }
+    
 
     return () => {
       controller.abort();
     };
-  }, [method, url]);
+  }, [method, url, ...deps]);
 
   return [data, isLoading, error];
 };

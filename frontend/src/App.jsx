@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import LayoutProvider from './components/router/LayoutProvider'
 import './App.scss'
+import { UserProvider} from './components/context/UserContext'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
+    <UserProvider>
       <LayoutProvider/>
+    </UserProvider>
   )
 }
 

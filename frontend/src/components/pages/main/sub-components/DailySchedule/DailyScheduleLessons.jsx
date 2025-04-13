@@ -1,18 +1,20 @@
 import React from 'react';
 import DailyScheduleTemplate from './DailyScheduleTemplate';
+import useBaseGet from '../../../../../hooks/axios/GET/useBaseGet';
 
-const array = [
-    {info: "физкультура", date: "12:10 - 13:40", place: "461 каб."},
-    {info: "физкультура", date: "12:10 - 13:40", place: "461 каб."},
-    {info: "физкультура", date: "12:10 - 13:40", place: "461 каб."},
-    {info: "физкультура", date: "12:10 - 13:40", place: "461 каб."},
-    {info: "физкультура", date: "12:10 - 13:40", place: "461 каб."},
-]
 
 const DailyScheduleLessons = ({info, title}) => {
-    return (
-        <DailyScheduleTemplate info={array} color='var(--blue-color)'/>
-    );
+
+    if (info.length) {
+        return (
+            <DailyScheduleTemplate info={info} color='var(--blue-color)'/>
+        )
+
+    } else {
+        return (
+            <b style={{textAlign: "center", fontSize: "var(--large-font-size)", opacity: 0.25}}>Нет занятий!</b>
+        )
+    }
 };
 
 
