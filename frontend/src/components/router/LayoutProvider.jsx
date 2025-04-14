@@ -9,6 +9,7 @@ import Notes from '../pages/notes/Notes'
 import LogIn from "../pages/auth/login/LogIn";
 import Registration from "../pages/auth/registration/Registration";
 import UnauthLayout from "./UnauthLayout";
+import ChatPage from "../pages/chatpage/ChatPage"
 
 export default function LayoutProvider () {
     const router = createBrowserRouter(
@@ -24,6 +25,8 @@ export default function LayoutProvider () {
                     <Route path='/notes' element={<Notes />} />
 
                     <Route path='/profile' element={<Profile />} />
+
+                    <Route path ='/sapsan' element={<ChatPage />} />
 
                 </Route>
 

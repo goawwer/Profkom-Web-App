@@ -17,6 +17,8 @@ alembic = "^1.15.2"
 fastapi-users = {extras = ["sqlalchemy"], version = "^14.0.1"}
 httpx = "^0.28.1"
 orjson = "^3.10.16"
+langchain-openai = "^0.3.12"
+langchain = "^0.3.23"
 
 
 [build-system]

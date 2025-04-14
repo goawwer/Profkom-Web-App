@@ -8,7 +8,7 @@ const Nav = () => {
     return (
         <nav className={s.nav}>
             <NavLink to='/' style={handleChangePage} className={s.nav__link}>главная</NavLink>
-            <NavLink to='/schedule' style={handleChangePage} className={s.nav__link}>расписание</NavLink>
+            <NavLink to='/sapsan' style={handleChangePage} className={s.nav__link}>сапсан</NavLink>
             <NavLink to='/notes' style={handleChangePage} className={s.nav__link}>заметки</NavLink>
             <NavLink to='/profile' style={handleChangePage} className={s.nav__link}>профиль</NavLink>
         </nav>

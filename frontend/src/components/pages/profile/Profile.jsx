@@ -40,7 +40,7 @@ const Profile = () => {
 
       <div className={s.footer}>
         <p className={s.footerText}>Есть вопрос? Сообщи нам!</p>
-        <a href="https://vk.com" className={s.vkLink}>
+        <a href="https://vk.com/profitusue" className={s.vkLink}>
           <img src={vk_icon} alt="VK" className={s.vkIcon} />
           <Arrow className={s.arrow}/>
         </a>
