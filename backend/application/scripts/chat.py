@@ -6,7 +6,7 @@ import os
 import json  # Добавлен импорт для работы с JSON
 from datetime import datetime  # Добавлен импорт для работы с датой и временем
 
-os.environ["OPENROUTER_API_KEY"] = "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"
+os.environ["OPENROUTER_API_KEY"] = "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"
 
 class AIAssistant:
     def __init__(self):
