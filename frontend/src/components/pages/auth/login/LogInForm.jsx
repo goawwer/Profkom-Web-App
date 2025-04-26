@@ -43,7 +43,7 @@ const LogInForm = () => {
 
     return (
             <form className={s.authForm} onSubmit={handleSubmit(onSubmit)}>
-                <label>имя пользователя
+                <label>эл. почта
                     <input  {...register('username', 
                         { required: 'это поле обязательно', 
                         onChange: () => trigger('username') 

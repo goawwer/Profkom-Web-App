@@ -1,97 +1,121 @@
-.chatContainer {
+.chat {
   display: flex;
   flex-direction: column;
-  position: fixed; /* Фиксируем контейнер чата */
-  top: 150px; /* Отступ для Header */
+  position: fixed;
+  top: 8rem; 
   left: 0;
-  width: 100%; /* Растягиваем на всю ширину экрана */
-  height: calc(100vh - 60px); /* Высота экрана минус высота Header */
+  width: 100%; 
+  height: 100vh; 
   overflow: hidden;
-  border: 1px solid #ccc;
-  padding: 0 1rem;
+  border: 0.1rem solid #ccc;
+  background-color: white;
+  overflow-y: auto;
 
-  p {
-    margin-bottom: 2rem;
+  &__headerTitles {
+    height: fit-content;
   }
   
-  b {
-    color: white
+  &__appTitle {
+    color: white;
+    font-size: var(--large-font-size);
   }
+
+  &__appDescription {
+    font-size: var(--less-font-size);
+    color: white;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+    z-index: 1; /* Убедитесь, что контент остается поверх псевдоэлемента */
+  }
+  
+  &__header::before {
+    content: '';
+    background-color: var(--purple-color);
+    position: absolute;
+    top: 0;
+    left: 50%; /* Центрируем псевдоэлемент относительно экрана */
+    transform: translateX(-50%); /* Смещаем обратно на половину своей ширины */
+    width: 100vw; /* Ширина равна ширине экрана */
+    height: 100%; /* Высота равна высоте .chatHeader */
+    z-index: -1; /* Псевдоэлемент будет за основным содержимым */
+  }
+
+  &__icon {
+    width: 5rem;
+    height: 5rem;
+    background-color: white;
+    border-radius: 100%;
+    background-image: url('../../../assets/imgs/sapsan.png');
+    background-size: 5rem 5rem;
+    background-repeat: no-repeat;
+    background-position: 0 0.25rem;
+  }
+  
+
+  &__dialogueContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 1rem 0.5rem;
+    gap: 1rem;
+    margin-bottom: 7rem;
+
+    @media (max-width: 400px) {
+      margin-bottom: 10rem;
+    }
+  }
+
+  &__inputContainer {
+    display: flex;
+    align-items: center;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    padding: 0.75rem;
+    background-color: #fff;
+
+    input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 0.1rem solid #ccc;
+      border-radius: 0.25rem;
+      margin-right: 0.75rem;
+    }
+  }
+  
+  &__sendButton {
+    color: var(--blue-color);
+    background: none;
+    background-color: white;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    font-size: var(--large-font-size);
+    font-weight: var(--black-font-weight);
+
+    &:hover, &:focus-visible {
+      background-color: var(--blue-color);
+      color: white
+    }
+  }
+
 }
 
-.chatHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  position: relative;
-  z-index: 1; /* Убедитесь, что контент остается поверх псевдоэлемента */
-}
-
-.chatHeader::before {
-  content: '';
-  background-color: var(--purple-color);
-  position: absolute;
-  top: 0;
-  left: 50%; /* Центрируем псевдоэлемент относительно экрана */
-  transform: translateX(-50%); /* Смещаем обратно на половину своей ширины */
-  width: 100vw; /* Ширина равна ширине экрана */
-  height: 100%; /* Высота равна высоте .chatHeader */
-  z-index: -1; /* Псевдоэлемент будет за основным содержимым */
-}
-
-
-.chatDialogue {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  padding: 10px;
-  background-color: #f9f9f9;
-  gap: 1rem;
-}
-
-.chatInput {
-  position: fixed; 
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  background-color: #fff;
-}
-
-.chatInput input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-.chatInput button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.chatInput button:hover {
-  background-color: #0056b3;
-  color: white
-}
-
-.sendButton {
-  color: white
-}
 
 .userMessage {
   color:white;
   background-color: var(--blue-color);
   border-radius: 1rem;
   padding: 1rem;
+  max-width: 75%;
 }
 
 .botMessage {
@@ -99,4 +123,9 @@
   background-color: var(--purple-color);
   border-radius: 1rem;
   padding: 1rem;
+  max-width: 75%;
+}
+
+.thinkingMessage {
+  transition: 0.5s ease-in-out 0.5s;
 }

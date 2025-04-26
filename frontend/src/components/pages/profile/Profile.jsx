@@ -10,39 +10,31 @@ const Profile = () => {
   const [userData, isLoading, error] = useBaseGet({ url: '/users/me' });
   const navigate = useNavigate()
 
-  if (isLoading) {
-    return <div>Загрузка...</div>;
-  }
-
-  if (error) {
-    return <div>Ошибка: {error.message}</div>;
-  }
-
   const handleLogout = () => {
     localStorage.removeItem('profkomUserToken');
     navigate('/auth/login')
   };
 
   return (
-    <div className={s.profileContainer}>
+    <div className={s.profile}>
 
-      <div className={s.profileIcon}>
+      <div className={s.profile__icon}>
         <img src={profile_pic}/>
       </div>
 
-      <h2 className={s.username}>{userData?.username }</h2>
-      <p className={s.group}>Группа: {userData?.group_name }</p>
+      <h2 className={s.profile__username}>{userData?.username }</h2>
+      <p className={s.profile__group}>{userData?.group_name }</p>
 
-      <button className={s.logoutButton} onClick={handleLogout}>
+      <button className={s.profile__logoutButton} onClick={handleLogout}>
         Выйти
       </button>
 
 
-      <div className={s.footer}>
-        <p className={s.footerText}>Есть вопрос? Сообщи нам!</p>
+      <div className={s.profile__footer}>
+        <p className={s.profile__footerText}>Есть вопрос? Сообщи нам!</p>
+        <Arrow className={s.profile__footerArrow}/>
         <a href="https://vk.com/profitusue" className={s.vkLink}>
           <img src={vk_icon} alt="VK" className={s.vkIcon} />
-          <Arrow className={s.arrow}/>
         </a>
       </div>
     </div>

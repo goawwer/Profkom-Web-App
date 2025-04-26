@@ -40,6 +40,8 @@ const NotesItemOpened = ({data, setIsOpened, isCreate}) => {
         console.log(data)
         if (isCreate) {
             handlePosthNote(data)
+            setIsOpened(false)
+            navigate('/notes')
             return
         } else {
             handlePatchNote(id, data)
@@ -53,7 +55,6 @@ const NotesItemOpened = ({data, setIsOpened, isCreate}) => {
             <form className={s.noteOpened} onSubmit={handleSubmit(onSubmit)}>
                     <button type='button'
                         onClick={() => {setIsOpened(false)}}
-                        style={{width: "3.7rem"}}
                     >
                         <Close_Icon />
                     </button>
@@ -78,7 +79,7 @@ const NotesItemOpened = ({data, setIsOpened, isCreate}) => {
 
                     <button type='button'
                         onClick={() => {handleNoteDelete(id); navigate('/notes')}}
-                        style={{width: "max-content", marginRight: "20%"}}
+                        style={{width: "max-content", marginRight: "50%"}}
                     >
                         удалить
                     </button>

@@ -1,105 +1,55 @@
-// Profile.module.scss
-
-// Переменные для цветов
-$primary-color: #1e90ff;
-$danger-color: #ff4d4d;
-$background-color: #f5f5f5;
-$white: #fff;
-
-// Основной контейнер
-.profileContainer {
+.profile {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 2rem;
-  text-align: center;
+  margin-top: 5rem;
 
-  .profileIcon {
-    width: 115px;
-    height: 115px;
-    background-color: #e0e0e0;
-    border-radius: 50%;
-    margin: 30px 0;
-    position: relative;
-    border:var(--blue-color) 3px solid;
+  &__icon {
+    margin-bottom: 2rem;
   }
 
-  .username {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--blue-color);
-    margin: 1rem 0 0.5rem;
+  &__username {
+    font-size: var(--large-font-size);
+    margin-bottom: 0.5rem;
   }
 
-  .group {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 30px;
+  &__group {
+    margin-bottom: 2rem;
+    font-size: var(--less-font-size);
   }
 
-  .logoutButton {
-    background-color: $danger-color;
-    color: $white;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 40px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.1s ease;
-    border: 0.2rem solid var(--red-color);
-    background: transparent;
-    color: #ff4d4d;
+  &__logoutButton {
+    color: var(--red-color);
+    padding: 0.5rem 2rem;
+    background: none;
+    border: var(--red-color) 0.2rem solid;
+    margin-bottom: 5rem;
+    border-radius: 5rem;
 
-    &:hover {
-      background-color: #ff4d4d;
-      color: white
+    transition: 0.2s ease;
+
+    &:hover, &:focus-visible {
+      color: white;
+      background-color: var(--red-color);
+      animation: 0.5s ease 1s;
     }
   }
 
-  .forgotPassword {
-    font-size: 14px;
-    color: #666;
-    text-decoration: none;
-    margin-bottom: 40px;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
-  .footer {
-    margin-top: 4rem;
-    
-
-    .footerText {
-      font-size: 12px;
-      color: var(--blue-color);
-      margin-bottom: 1rem;
-      margin-left: 3rem;
-    }
-
-    .vkLink {
-      display: inline-block;
-
-      .vkIcon {
-        width: 50px;
-        height: 50px;
-        margin-left: 5rem;
-        margin-top: 2rem;
-      }
-    }
+  &__footerText {
+    width: 100%;
+    text-align: right;
   }
-}
 
-.loading,
-.error {
-  font-size: 16px;
-  color: #333;;
-  margin-top: 20px;
-}
+  &__footerArrow {
+    margin-left: 6rem;
+  }
 
-.arrow {
-  width: 5rem;
 }

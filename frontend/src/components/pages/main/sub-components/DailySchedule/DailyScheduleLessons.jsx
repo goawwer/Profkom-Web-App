@@ -1,13 +1,24 @@
 import React from 'react';
 import DailyScheduleTemplate from './DailyScheduleTemplate';
-import useBaseGet from '../../../../../hooks/axios/GET/useBaseGet';
+import getLesson from "../../actions/getLessons"
+import parseLessons from '../../actions/parseLessons';
 
 
-const DailyScheduleLessons = ({info, title}) => {
+const DailyScheduleLessons = ({group, week_offset, currentDay, dayOffset, title}) => {
 
-    if (info.length) {
+    const [lessons, isLoading_lesson, error_lesson] = getLesson(group, week_offset, currentDay)
+    console.log("lessons = "+ lessons)
+    const scheduleDayArray = parseLessons(lessons, currentDay)
+
+
+    if (!lessons) {
         return (
-            <DailyScheduleTemplate info={info} color='var(--blue-color)'/>
+            <b style={{textAlign: "center", fontSize: "var(--large-font-size)", opacity: 0.25}}>Загрузка занятий!</b>
+        )
+    }
+    if (scheduleDayArray.length) {
+        return (
+            <DailyScheduleTemplate info={scheduleDayArray} bgColor='var(--blue-color)' dayOffset={dayOffset} needsActualiityCheck={true}/>
         )
 
     } else {

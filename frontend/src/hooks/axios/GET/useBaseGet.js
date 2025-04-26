@@ -1,33 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import baseAxios from './baseAxios';
 
-// Создаем экземпляр axios
-const baseAxios = axios.create({
-  baseURL: 'http://127.0.0.1:8000/diary',
-});
-
-// Добавляем интерцептор для автоматического добавления токена
-baseAxios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('profkomUserToken'); // Исправляем ключ
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Добавляем заголовок Authorization
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Интерцептор для обработки ошибок (добавим для диагностики)
-baseAxios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error('Ошибка запроса:', error.response?.status, error.response?.data);
-    return Promise.reject(error);
-  }
-);
-
-const useBaseGet = ({ method = 'GET', url, deps=[] }) => {
+const useBaseGet = ({ url, deps=[] }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -38,7 +13,7 @@ const useBaseGet = ({ method = 'GET', url, deps=[] }) => {
 
     const fetchData = async () => {
       try {
-        const response = await baseAxios.request({ method, url, signal });
+        const response = await baseAxios.get( url, { signal });
         setData(response.data);
         console.log('Успешный ответ:', response.data);
       } catch (error) {
@@ -51,14 +26,12 @@ const useBaseGet = ({ method = 'GET', url, deps=[] }) => {
       }
     };
 
-
       fetchData();
-    
 
     return () => {
       controller.abort();
     };
-  }, [method, url, ...deps]);
+  }, [ url, ...deps]);
 
   return [data, isLoading, error];
 };

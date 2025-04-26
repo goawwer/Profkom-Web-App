@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './DailyTask.module.scss'
 
-const DailyTask = ({info, color}) => {
+const DailyTask = ({info, bgColor, color="white", onClick}) => {
     return (
         <div className={s.dailyTask}>
             <div className={s.dailyTask__subInfo}>
@@ -9,7 +9,7 @@ const DailyTask = ({info, color}) => {
                 <p>{info.place}</p>
             </div>
 
-            <button className={s.dailyTask__button} style={{backgroundColor: `${color}`}}>
+            <button className={s.dailyTask__button} style={{backgroundColor: `${bgColor}`, color: `${color}`}} onClick={() => onClick}>
                 {info.info}
             </button>
         </div>
