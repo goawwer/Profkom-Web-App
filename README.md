@@ -87,9 +87,9 @@ docker-compose up --build
 ├── 📂 frontend
 │   ├── 📂 src
 │   │   ├── 📂 assets         # Статические файлы 
-│   │   ├── 📂 components         # Страницы
+│   │   ├── 📂 components         # Компоненты
 │   │   ├── 📂 hooks           # Кастомные хуки и общие функции
-│   │   ├── 📂 styles         # Стили
+│   │   ├── 📂 styles         # Глобальные стили
 │   │   ├── 📜 Dockerfile
 │   │   └── 📜 main.js       # Точка входа фронтенда
 ├── 📜 .gitignore             # Игнорируемые файлы
