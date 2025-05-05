@@ -64,7 +64,7 @@
   - Asyncpg
 
 ## Инструкция к запуску
-```
+```bash
 git clone https://github.com/ZaplatiteZaSitePJ/profkom-diary
 
 cd profkom-diary
