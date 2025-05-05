@@ -69,8 +69,35 @@ git clone https://github.com/ZaplatiteZaSitePJ/profkom-diary
 
 cd profkom-diary
 docker-compose up --build
+
 ```
 
+## Структура проекта
+```
+📂 hackaton
+├── 📂 backend
+│   ├── 📂 application
+│   │   ├── 📂 alembic           # Версии миграций
+│   │   ├── 📂 api           # cruds, handlers
+│   │   ├── 📂 core           # Модели, схемы, конфиг, микро-сервисы
+│   │   ├── 📂 scripts      # Скрипты, взаимодействие с чатом
+│   │   ├── 📜 Dockerfile
+│   │   └── 📜 main.py       # Точка входа FastAPI           
+│   └── 📜 pyproject.toml  # Зависимости
+├── 📂 frontend
+│   ├── 📂 src
+│   │   ├── 📂 assets         # Статические файлы 
+│   │   ├── 📂 components         # Страницы
+│   │   ├── 📂 hooks           # Кастомные хуки и общие функции
+│   │   ├── 📂 styles         # Стили
+│   │   ├── 📜 Dockerfile
+│   │   └── 📜 main.js       # Точка входа фронтенда
+├── 📜 .gitignore             # Игнорируемые файлы
+├── 📜 docker-compose.yaml   # docker контейнер
+├── 📜 .dockerignor 
+└── 📜 README.md             # Документация
+
+```
 
 ## Планы по развитию:
   - Адаптив для десктопных устройств 
@@ -78,7 +105,7 @@ docker-compose up --build
   - Админская страница
   - Возможность добавлять планы на день
   - Закрепление важных заметок на главном экране
-  - Деплой проекта 
+  - Деплой проекта (как пэт-проекта)
 
 
 
