@@ -1,0 +1,41 @@
+.authForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 13.69rem;
+    gap: 1rem;
+    margin-bottom: 3rem;
+
+    label {
+        text-align: center;
+        font-weight: var(--bold-font-weight);
+    }
+
+    &__errors {
+        color: var(--red-color);
+        font-size: var(--smallest-font-size);
+        text-align: left;
+        width: 100%;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    &__mainButton {
+        background-color: var(--blue-color);
+        padding: 0.5rem 1rem;
+        width: fit-content;
+        color: white;
+    }
+
+    &__sideButton {
+        background: transparent;
+        background-color: transparent;
+        color: var(--black--color);
+        font-size: var(--less-font-size)
+    }
+}

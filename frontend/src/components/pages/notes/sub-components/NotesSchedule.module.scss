@@ -1,0 +1,7 @@
+.schedule {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+
+    transition: all 1s ease-in-out 0.2s;
+}

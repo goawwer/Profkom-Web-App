@@ -1,0 +1,23 @@
+:root {
+    /* Базовая тема */
+    --bg-color: white;
+
+    /* Неизменные цвета */
+    --blue-color: #1b60f9;
+    --purple-color: #861BF9;
+    --red-color: #F91B1F;
+    --orange-color: #F9781B;
+    --black-color: #2c2e35;
+
+    /* Переменные шрифтов */
+    --normal-font-size: 3.888vw;
+    --less-font-size: 0.876rem;
+    --smallest-font-size: 0.75rem;
+    --large-font-size: 2rem;
+    --biggest-font-size: 4rem;
+    --low-font-size: 0.75rem;
+	--font-family: 'Montserrat';
+	--normal-font-weight: 500;
+    --bold-font-weight: 700;
+    --black-font-weight: 900;
+}

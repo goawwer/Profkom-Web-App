@@ -1,0 +1,23 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+
+    &__formPlace {
+        z-index: 1;
+    }
+    
+
+    &__decorationLogo {
+        position: absolute;
+        opacity: 5%;
+        bottom: 0rem;
+        left: 2rem;
+        transform: rotate(-15deg) scale(1.5);
+        z-index: 0;
+    }
+}

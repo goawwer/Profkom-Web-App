@@ -1,0 +1,26 @@
+.dailyPanel {
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        margin-bottom: 2rem;
+
+        button {
+            font-size: 2rem;
+            padding: 0;
+            background: transparent;
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem
+    }
+
+    &__day {
+        letter-spacing: 0.05rem;
+        font-weight: var(--black-font-weight);
+    }
+}

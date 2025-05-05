@@ -1,0 +1,41 @@
+.portal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(44, 46, 53, 0.75);;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: auto;
+    
+    transition: 0.2s ease-in-out;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        width: 100%;
+        overflow: auto;
+
+        button {
+            background: none;
+            width: 2rem;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}

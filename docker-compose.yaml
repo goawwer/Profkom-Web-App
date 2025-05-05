@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      APP_CONFIG__DB__URL: postgresql+asyncpg://user:pg_pwd@pg:5432/diary
+      APP_CONFIG__DB__ECHO: 0
+    ports:
+      - "8000:8000"
+    depends_on:
+      pg:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+
+  pg:
+    image: postgres:16
+    container_name: diary_db
+    environment:
+      POSTGRES_DB: diary
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pg_pwd
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d diary -U user"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  pgdata:
