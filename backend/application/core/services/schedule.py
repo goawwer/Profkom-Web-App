@@ -45,7 +45,7 @@ class GroupScheduleService:
         :param week_offset: Смещение недели
         :return: Кортеж (start_date, end_date) в формате DD.MM.YYYY
         """
-        # Текущая дата
+
         today = datetime.now()
 
         start_of_week = today - timedelta(days=today.weekday())
