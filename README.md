@@ -65,7 +65,7 @@
 
 ## Инструкция к запуску
 ```bash
-git clone https://github.com/ZaplatiteZaSitePJ/profkom-diary
+git clone https://github.com/goawwer/Profkom-Web-App
 
 # необходимо создать в директории profkom-diary / backend / application .env-файл со следующими значениями:
 # APP_CONFIG__DB__URL = postgresql+asyncpg://user:pg_pwd@localhost:5433/diary
