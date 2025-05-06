@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import getFromLocalStorage from "../../hooks/getFromLocalStorage";
 import NotAuthPage from "../pages/auth/not-auth-page/NotAuthPage";
 
-const RootLayout = () => {
+const AuthedLayout = () => {
 
     try {
         const gfls = getFromLocalStorage();
@@ -23,4 +23,4 @@ const RootLayout = () => {
 
 }
 
-export default RootLayout
+export default AuthedLayout

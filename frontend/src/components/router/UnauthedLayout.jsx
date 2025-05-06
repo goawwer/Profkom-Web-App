@@ -3,7 +3,7 @@ import Header from "../navigation/Header";
 import { Outlet } from "react-router-dom";
 
 
-const RootLayout = () => {
+const UnauthedLayout = () => {
 
     return(
         <div style = {{width: "100vw", position: "relative", overflow: "hidden", height:"100vh", backgroundColor:"white"}}>
@@ -12,4 +12,4 @@ const RootLayout = () => {
     )
 }
 
-export default RootLayout
+export default UnauthedLayout

@@ -67,8 +67,23 @@
 ```bash
 git clone https://github.com/ZaplatiteZaSitePJ/profkom-diary
 
-cd profkom-diary
+# необходимо создать в директории profkom-diary / backend / application .env-файл со следующими значениями:
+# APP_CONFIG__DB__URL = postgresql+asyncpg://user:pg_pwd@localhost:5433/diary
+# APP_CONFIG__ACCESS_TOKEN__RESET_PASSWORD_TOKEN_SECRET = 5db9c221ede311658fa7b1ffc8ddeaa63326b32b03ea04455731dc04c1c72eec
+# APP_CONFIG__ACCESS_TOKEN__VERIFICATION_TOKEN_SECRET = 4c2195c58d565dbf5039f608ffdeb56c2dfcf970c1eed1b58d314cf6b6a61e17
+
+cd profkom-diary/frontend
+npm run build
+
+cd ..
 docker-compose up --build
+
+# После окончания билда необходимо открыть в любом браузере ссылку
+# http://localhost:3000/
+
+# ВАЖНО: изначально приложение подразумевалось как МОБИЛЬНОЕ
+# НАЖМИТЕ f12 -> ctrl + shift + M -> затем выберите любое мобильное разрешение
+# ПРимечание: Адаптив для десктопов будет добавлен позже
 
 ```
 
