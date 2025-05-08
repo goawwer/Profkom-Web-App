@@ -72,7 +72,11 @@ git clone https://github.com/goawwer/Profkom-Web-App
 # APP_CONFIG__ACCESS_TOKEN__RESET_PASSWORD_TOKEN_SECRET = 5db9c221ede311658fa7b1ffc8ddeaa63326b32b03ea04455731dc04c1c72eec
 # APP_CONFIG__ACCESS_TOKEN__VERIFICATION_TOKEN_SECRET = 4c2195c58d565dbf5039f608ffdeb56c2dfcf970c1eed1b58d314cf6b6a61e17
 
-cd profkom-diary/frontend
+cd profkom-diary/backend
+npm install
+
+cd ../frontend
+npm install
 npm run build
 
 cd ..
